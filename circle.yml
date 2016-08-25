@@ -16,7 +16,7 @@ test:
 
 deployment:
   docker:
-    branch: [master,develop,feature/ECR]
+    branch: [master]
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - TERM=dumb docker push cjmurphy42/docker-aws-cli
+      - docker push cjmurphy42/docker-aws-cli
