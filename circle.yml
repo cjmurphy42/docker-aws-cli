@@ -1,0 +1,21 @@
+machine: 
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker build -t cjmurphy42/docker-aws-cli .
+
+test:
+  override:
+    - docker run -d  cjmurphy42/docker-aws-cli aws --help
+
+deployment:
+  docker:
+    branch: [master,develop,feature/ECR]
+    commands:
+      - TERM=dumb docker push cjmurphy42/docker-aws-cli
