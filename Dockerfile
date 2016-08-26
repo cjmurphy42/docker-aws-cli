@@ -1,6 +1,6 @@
-FROM alpine:3.3
+FROM phusion/baseimage
 
-RUN apk update
-RUN apk add python py-pip py-setuptools ca-certificates groff less curl
-RUN pip install awscli
+RUN apt-get update && \
+    apt-get install python-pip -y && \
+    pip install awscli
 
